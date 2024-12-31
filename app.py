@@ -6,13 +6,9 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 from langchain_core.output_parsers import StrOutputParser
 from PIL import Image
+import os
 
-# from dotenv import load_dotenv
-# import os
-
-# load_dotenv()
-
-# os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY") 
+api_key = "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"
 
 st.set_page_config(page_title="Globalize Email",page_icon="💬") # Setting up some initial things
 st.header("Globalize Text",divider='rainbow')
@@ -42,7 +38,7 @@ with col2: # Col2 can perform the below
     
     # Specifying the image path
     
-    image_path = "globalizetext/communicate.png"
+    image_path = "communicate.png"
     
     try:
         image = Image.open(image_path)
@@ -92,7 +88,7 @@ elif tone == "Informal" and dialect == "British":
         ("user","Question:{question}")
     ])
 
-groqllm = ChatGroq(model='llama3-8b-8192',temperature=0) # Instancing groq
+groqllm = ChatGroq(model='llama3-8b-8192',temperature=0, api_key=api_key) # Instancing groq
 output = StrOutputParser() # Parsing
 chain = prompts|groqllm|output # Chain
 
